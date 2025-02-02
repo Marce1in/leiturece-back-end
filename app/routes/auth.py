@@ -12,10 +12,8 @@ from ..dependencies.database.models import EmailCheck, User
 
 from ..dependencies.mail.mail import email_dependency
 
-from ..schemas.auth import UserLogin, UserRegister
+from ..schemas.auth import UserRegister
 from ..helpers.auth import hash_secret
-
-from ..settings import config
 
 router = APIRouter(
     prefix="/auth",

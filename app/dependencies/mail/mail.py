@@ -1,12 +1,10 @@
 import ssl
-from contextlib import asynccontextmanager, contextmanager
-from email.mime import text
+from contextlib import asynccontextmanager
 from aiosmtplib import SMTP
-from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate, make_msgid
-from typing import Annotated, AsyncGenerator, Generator
+from typing import Annotated, AsyncGenerator
 
 from fastapi.params import Depends
 
@@ -27,7 +25,7 @@ class EmailHandler:
 
         self.__context = ssl.create_default_context()
 
-    async def message_maker(self, receiver_email, subject, text_body, html_body):
+    def message_maker(self, receiver_email, subject, text_body, html_body):
         message = MIMEMultipart("alternative")
         message["from"] = self.__sender_email
         message["to"] = receiver_email
@@ -42,7 +40,7 @@ class EmailHandler:
         return message
 
     async def send_email(self, receiver_email, subject, html_body, text_body):
-        message = await self.message_maker(
+        message = self.message_maker(
             receiver_email, subject, html_body, text_body
         )
 
