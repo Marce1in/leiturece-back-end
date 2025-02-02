@@ -23,7 +23,9 @@ class User(Base):
     sessions: Mapped[Optional[list["UserSession"]]] = relationship(
         "UserSession", back_populates="user", cascade="all, delete-orphan"
     )
-    email_check: Mapped[Optional["EmailCheck"]] = relationship("EmailCheck", cascade="all, delete-orphan")
+    email_check: Mapped[Optional["EmailCheck"]] = relationship(
+        "EmailCheck", cascade="all, delete-orphan", back_populates="user"
+    )
 
 
 class UserSession(Base):
@@ -36,11 +38,11 @@ class UserSession(Base):
 
     user: Mapped[User] = relationship(User, back_populates="sessions")
 
+
 class EmailCheck(Base):
     __tablename__ = "email_check"
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
     email_hash: Mapped[str] = mapped_column(VARCHAR(72), nullable=False)
     expires: Mapped[date] = mapped_column(DATE(), nullable=False)
 
-
-    user: Mapped[User] = relationship(User)
+    user: Mapped[User] = relationship(User, back_populates="email_check")

@@ -4,7 +4,7 @@ class Body():
     def email_verification(self, hash_email):
         validation_url = config.BACKEND_DOMAIN + "/auth/mail/" + hash_email
 
-        html_body = """
+        html_body = f"""
         <!DOCTYPE html>
         <html lang="pt-BR">
         <head>
@@ -20,7 +20,7 @@ class Body():
                 </p>
                 <div style="text-align: center; margin: 30px 0;">
                     <a href="{validation_url}"
-                       style="background-color: #3498db;
+                       style="background-color: #000000;
                               color: white;
                               padding: 12px 25px;
                               text-decoration: none;
