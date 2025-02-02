@@ -1,10 +1,9 @@
 from fastapi import FastAPI
-from routes import auth
+from .routes import auth
 from contextlib import asynccontextmanager
-from database.db import SessionManager
+from .dependencies.database.db import SessionManager
 
 import uvicorn
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,3 +22,4 @@ app.include_router(auth.router)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", reload=True, port=5000)
+

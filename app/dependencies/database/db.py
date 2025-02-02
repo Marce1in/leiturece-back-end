@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 
-from settings import config
+from ...settings import config
 
 
 class Base(DeclarativeBase):
@@ -61,13 +61,13 @@ class DatabaseSessionManager:
         finally:
             await Session.close()
 
-SessionManager = DatabaseSessionManager(
-    config.get_db_url(), {"echo": config.get_db_echo()}
-)
+
+SessionManager = DatabaseSessionManager(config.DB_URL, {"echo": config.DB_ECHO})
 
 
 async def get_db_session():
     async with SessionManager.session() as session:
         yield session
+
 
 db_dependency = Annotated[AsyncSession, Depends(get_db_session)]
