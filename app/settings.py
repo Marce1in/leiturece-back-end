@@ -17,6 +17,10 @@ class Config:
         self.EMAIL_USERNAME = self.get_env("EMAIL_USERNAME")
 
         self.BACKEND_DOMAIN = self.get_env("BACKEND_DOMAIN")
+        self.SECRET_KEY = self.get_env("SECRET_KEY")
+
+        self.TOKEN_ALGORITHM = self.get_env("TOKEN_ALGORITHM")
+        self.ACESS_TOKEN_EXPIRE_MINUTES = self.get_int("ACESS_TOKEN_EXPIRE_MINUTES")
 
     def get_env(self, variable_name) -> str:
         variable = os.getenv(variable_name)
