@@ -1,5 +1,6 @@
 from typing import Annotated
 from fastapi import APIRouter, Body, HTTPException, status
+from fastapi.security import HTTPBasic
 
 from datetime import date, timedelta
 
