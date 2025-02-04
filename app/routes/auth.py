@@ -1,6 +1,5 @@
 from typing import Annotated
 from fastapi import APIRouter, Body, HTTPException, status
-from fastapi.security import HTTPBasic
 
 from datetime import date, timedelta
 
@@ -27,30 +26,14 @@ async def auth():
     pass
 
 
-@router.post("/login")
-async def login():
+@router.post("/token")
+async def token():
     pass
 
 
-@router.post("/mail/{mail_hash}")
-async def mail_verify(mail_hash: str, db: db_dependency):
-    email = await db.scalar(
-        select(EmailCheck).where(EmailCheck.email_hash == mail_hash)
-    )
-
-    if email is None:
-        return HTTPException(status.HTTP_401_UNAUTHORIZED, "Hash inválido")
-
-    user = await db.scalar(select(User).where(User.id == email.user_id))
-
-    if user is None:
-        return HTTPException(status.HTTP_404_NOT_FOUND, "Usuário não encontrado")
-
-    user.email_verified = True
-    await db.delete(email)
-    await db.commit()
-
-    return {"message": "E-mail verificado com sucesso"}
+@router.post("/login")
+async def login():
+    pass
 
 
 @router.post("/register")
@@ -102,6 +85,27 @@ async def register(
     )
 
     return {"message": "FOI, olha o email boi"}
+
+
+@router.post("/mail/{mail_hash}")
+async def mail_verify(mail_hash: str, db: db_dependency):
+    email = await db.scalar(
+        select(EmailCheck).where(EmailCheck.email_hash == mail_hash)
+    )
+
+    if email is None:
+        return HTTPException(status.HTTP_401_UNAUTHORIZED, "Hash inválido")
+
+    user = await db.scalar(select(User).where(User.id == email.user_id))
+
+    if user is None:
+        return HTTPException(status.HTTP_404_NOT_FOUND, "Usuário não encontrado")
+
+    user.email_verified = True
+    await db.delete(email)
+    await db.commit()
+
+    return {"message": "E-mail verificado com sucesso"}
 
 
 @router.post("/logout")
