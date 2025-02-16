@@ -13,18 +13,16 @@ from ..dependencies.token.token import token_dependency
 
 def verify_secret(secret: str, hash_secret: str) -> bool:
     return bcrypt.checkpw(
-        bytes(secret, encoding="utf-8"),
-        bytes(hash_secret, encoding="utf-8"),
+        secret.encode(),
+        hash_secret.encode(),
     )
 
 
 def hash_secret(secret: str) -> str:
-    return str(
-        bcrypt.hashpw(
-            bytes(secret, encoding="utf-8"),
-            bcrypt.gensalt(),
-        )
-    )
+    return bcrypt.hashpw(
+        secret.encode(),
+        bcrypt.gensalt(),
+    ).decode()
 
 
 def generate_uuid() -> str:
