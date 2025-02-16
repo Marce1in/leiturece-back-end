@@ -18,9 +18,7 @@ class Config:
 
         self.BACKEND_DOMAIN = self.get_env("BACKEND_DOMAIN")
         self.SECRET_KEY = self.get_env("SECRET_KEY")
-
-        self.TOKEN_ALGORITHM = self.get_env("TOKEN_ALGORITHM")
-        self.ACESS_TOKEN_EXPIRE_MINUTES = self.get_int("ACESS_TOKEN_EXPIRE_MINUTES")
+        self.SECURE_COOKIES = self.get_bool("SECURE_COOKIES")
 
     def get_env(self, variable_name) -> str:
         variable = os.getenv(variable_name)

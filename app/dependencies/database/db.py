@@ -32,7 +32,7 @@ class DatabaseSessionManager:
         self.__engine = None
         self.__sessionmaker = None
 
-    async def get_engine(self) -> AsyncEngine | None:
+    def get_engine(self) -> AsyncEngine | None:
         return self.__engine
 
     @asynccontextmanager
