@@ -1,4 +1,4 @@
-from passlib.context import CryptContext
+import bcrypt
 from uuid import uuid4
 from datetime import timedelta
 from typing import Annotated
@@ -10,15 +10,21 @@ from ..dependencies.database.db import db_dependency
 from ..dependencies.database.models import UserSession
 from ..dependencies.token.token import token_dependency
 
-passwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 def verify_secret(secret: str, hash_secret: str) -> bool:
-    return passwd_context.verify(secret, hash_secret)
+    return bcrypt.checkpw(
+        bytes(secret, encoding="utf-8"),
+        bytes(hash_secret, encoding="utf-8"),
+    )
 
 
 def hash_secret(secret: str) -> str:
-    return passwd_context.hash(secret)
+    return str(
+        bcrypt.hashpw(
+            bytes(secret, encoding="utf-8"),
+            bcrypt.gensalt(),
+        )
+    )
 
 
 def generate_uuid() -> str:
