@@ -33,7 +33,6 @@ def set_access_token_cookie(token: str, response: Response, expire_minutes: int)
     response.set_cookie(
         key="ACCESS_TOKEN",
         value=token,
-        httponly=True,
         secure=config.SECURE_COOKIES,
         domain=config.BACKEND_DOMAIN,
         samesite="lax",
