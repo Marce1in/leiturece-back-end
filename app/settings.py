@@ -5,9 +5,11 @@ from dotenv import load_dotenv
 class Config:
 
     def __init__(self):
-        self.PRODUCTION = self.get_bool("PRODUCTION")
 
-        if self.PRODUCTION:
+        if os.getenv("PRODUCTION", False):
+            self.PRODUCTION = True
+        else:
+            self.PRODUCTION = False
             load_dotenv()
 
         self.DB_URL = self.get_env("DB_URL")
