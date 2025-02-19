@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from .settings import config
 from .routes import auth
 from contextlib import asynccontextmanager
 from .dependencies.database.db import SessionManager
@@ -12,6 +15,21 @@ async def lifespan(app: FastAPI):
         await SessionManager.close()
 
 app = FastAPI(title="Leiturece Backend", lifespan=lifespan)
+
+origins = [
+    "http://localhost"
+    "http://localhost:8000"
+    "http://localhost:3000"
+    f"https://{config.BACKEND_DOMAIN}"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
