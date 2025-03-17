@@ -17,10 +17,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Leiturece Backend", lifespan=lifespan)
 
 origins = [
-    "http://localhost"
-    "http://localhost:8000"
-    "http://localhost:3000"
-    f"https://{config.BACKEND_DOMAIN}"
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    f"https://{config.BACKEND_DOMAIN}",
 ]
 
 app.add_middleware(

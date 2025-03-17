@@ -2,7 +2,7 @@ from ...settings import config
 
 class Body():
     def email_verification(self, hash_email):
-        validation_url = config.BACKEND_DOMAIN + "/auth/mail/" + hash_email
+        validation_url = "http://localhost:3000/confirmar-email/" + hash_email
 
         html_body = f"""
         <!DOCTYPE html>

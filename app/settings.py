@@ -12,7 +12,14 @@ class Config:
             self.PRODUCTION = False
             load_dotenv()
 
-        self.DB_URL = self.get_env("DB_URL")
+        self.DB_USER = self.get_env("DB_USER")
+        self.DB_NAME = self.get_env("DB_NAME")
+        self.DB_HOST = self.get_env("DB_HOST")
+        self.DB_PORT = self.get_env("DB_PORT")
+        self.DB_PASSWORD = self.get_env("DB_PASSWORD")
+
+        self.DB_URL = f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
         self.DB_ECHO = self.get_bool("DB_ECHO")
 
         self.EMAIL_SENDER = self.get_env("EMAIL_SENDER")
