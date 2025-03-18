@@ -58,7 +58,7 @@ Define os serviços da aplicação:
 
 ### `Dockerfile`
 
-- Baseado em `python:3.13-slim`.
+- Baseado em `python:3.13-alpine`.
 - Instala dependências do sistema e o Poetry.
 - Configura o ambiente Python, instala as dependências definidas em `pyproject.toml` e `poetry.lock`.
 - Copia o código da aplicação e expõe a porta 8000.
