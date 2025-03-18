@@ -21,7 +21,7 @@ class EmailHandler:
         self.__password = config.EMAIL_PASSWORD
         self.__username = config.EMAIL_USERNAME
 
-        self.__domain = config.BACKEND_DOMAIN
+        self.__domain = config.HOST_DOMAIN
 
         self.__context = ssl.create_default_context()
 

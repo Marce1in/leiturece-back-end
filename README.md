@@ -36,7 +36,7 @@ EMAIL_PASSWORD=foo_bar
 EMAIL_USERNAME=baz_foo
 
 # Configurações do Back-end
-BACKEND_DOMAIN=localhost
+HOST_DOMAIN=localhost
 SECRET_KEY=type_your_secret_key_here
 SECURE_COOKIES=False
 ```

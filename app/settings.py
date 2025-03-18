@@ -28,7 +28,7 @@ class Config:
         self.EMAIL_PASSWORD = self.get_env("EMAIL_PASSWORD")
         self.EMAIL_USERNAME = self.get_env("EMAIL_USERNAME")
 
-        self.BACKEND_DOMAIN = self.get_env("BACKEND_DOMAIN")
+        self.HOST_DOMAIN = self.get_env("HOST_DOMAIN")
         self.SECRET_KEY = self.get_env("SECRET_KEY")
         self.SECURE_COOKIES = self.get_bool("SECURE_COOKIES")
 

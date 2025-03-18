@@ -20,7 +20,7 @@ origins = [
     "http://localhost",
     "http://localhost:8000",
     "http://localhost:3000",
-    f"https://{config.BACKEND_DOMAIN}",
+    f"https://{config.HOST_DOMAIN}",
 ]
 
 app.add_middleware(
